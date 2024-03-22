@@ -44,7 +44,7 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
 
 //id:widget:id
 // -- detail d'un album
-     @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Détails album')),
@@ -90,20 +90,31 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
                       final song = albumDetails.songs[index];
                       return ListTile(
                         title: Text(song.name),
-                        trailing: IconButton(
-                          icon: Icon(_isPlaying ? Icons.stop : Icons.play_arrow),
-                          onPressed: () async {
-                            setState(() {
-                              _isPlaying = !_isPlaying; 
-                            });
-                            if (_isPlaying) {
-                              await _playAudio(song.previewUrl);
-                            } else {
-                              await _stopAudio();
-                            }
-                          },
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: Icon(_isPlaying ? Icons.stop : Icons.play_arrow),
+                              onPressed: () async {
+                                setState(() {
+                                  _isPlaying = !_isPlaying; 
+                                });
+                                if (_isPlaying) {
+                                  await _playAudio(song.previewUrl);
+                                } else {
+                                  await _stopAudio();
+                                }
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.add),
+                              onPressed: () {
+                                // Ajoutez la chanson à la playlist
+                                // Vous pouvez implémenter cette logique ici
+                              },
+                            ),
+                          ],
                         ),
-
                       );
                     },
                   ),
