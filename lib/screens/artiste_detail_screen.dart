@@ -112,8 +112,7 @@ class _ArtisteDetailScreenState extends State<ArtisteDetailScreen> {
                                       IconButton(
                                         icon: Icon(Icons.add),
                                         onPressed: () {
-                                          // Ajoutez la chanson à la playlist
-                                          // Vous pouvez implémenter cette logique ici
+                                          
                                         },
                                       ),
                                     ],
