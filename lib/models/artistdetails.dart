@@ -1,6 +1,6 @@
 import 'package:projet_spotify_gorouter/models/albumdetails.dart';
 
-class ArtistDetails {
+class ArtistDetails{
   final String id;
   final String name;
   final List<String> genres;
@@ -15,20 +15,20 @@ class ArtistDetails {
     
   });
 
-  factory ArtistDetails.fromJson(Map<String, dynamic> json) {
+  factory ArtistDetails.fromJson(Map<String, dynamic> json){
     List<String> url = [];
     if (json.containsKey('images')) {
       json['images'].forEach((image) {
         url.add(image['url']);
       });
-    }
+  }
 
     
 
     return ArtistDetails(
       id: json['id'] ?? '',
       name: json['name'] ?? '',
-      genres: List<String>.from(json['genres'] ?? []),
+      genres: List<String>.from(json['genres']?? []),
       images: url,
     );
   }

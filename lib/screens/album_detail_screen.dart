@@ -6,13 +6,13 @@ import 'package:projet_spotify_gorouter/screens/spotify_provider.dart';
 import '../models/albumdetails.dart';
 
 /// The details screen
-class AlbumDetailScreen extends StatefulWidget {
+class AlbumDetailScreen extends StatefulWidget{
   /// Constructs a [AlbumDetailScreen]
   final String id;
-  const AlbumDetailScreen({Key? key, required this.id}) : super(key: key);
+  const AlbumDetailScreen({Key? key, required this.id}): super(key: key);
 
   @override
-  _AlbumDetailScreenState createState() => _AlbumDetailScreenState();
+  _AlbumDetailScreenState createState()=> _AlbumDetailScreenState();
 }
 
 class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
@@ -21,12 +21,12 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
   late bool _isPlaying = false;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     _albumDetailsFuture = SpotifyProvider.getAlbumDetails(widget.id);
     _audioPlayer.playerStateStream.listen((event) {
-      if (event.processingState == ProcessingState.completed) {
-        setState(() {
+      if(event.processingState == ProcessingState.completed) {
+        setState((){
           _isPlaying = false;
         });
       }
@@ -34,7 +34,7 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
   }
 
   @override
-  void dispose() {
+  void dispose(){
     _audioPlayer.dispose();
     super.dispose();
   }
@@ -45,17 +45,19 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
 //id:widget:id
 // -- detail d'un album
 @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(title: Text('Détails album')),
       body: FutureBuilder<AlbumDetails>(
         future: _albumDetailsFuture,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
+          }
+          else if(snapshot.hasError){
             return Center(child: Text('Erreur: ${snapshot.error}'));
-          } else {
+          }
+          else{
             final albumDetails = snapshot.data!;
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +69,7 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
                 ),
                 Text(albumDetails.title, style: TextStyle(fontSize: 24)),
                 GestureDetector(
-                  onTap: () {
+                  onTap: (){
                     context.go('/a/artistedetails/${albumDetails.artistId}');
                   },
                   child: Text(
@@ -99,9 +101,12 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
                                 setState(() {
                                   _isPlaying = !_isPlaying; 
                                 });
-                                if (_isPlaying) {
+                                if(_isPlaying){
+
                                   await _playAudio(song.previewUrl);
-                                } else {
+                                }
+
+                                else{
                                   await _stopAudio();
                                 }
                               },
@@ -126,7 +131,7 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
     );
   }
 
-  Future<void> _playAudio(String url) async {
+  Future<void> _playAudio(String url) async{
     await _audioPlayer.setUrl(url);
     await _audioPlayer.play();
     setState(() {
@@ -134,7 +139,7 @@ class _AlbumDetailScreenState extends State<AlbumDetailScreen> {
     });
   }
 
-  Future<void> _stopAudio() async {
+  Future<void> _stopAudio() async{
     await _audioPlayer.stop();
     setState(() {
       _isPlaying = false;

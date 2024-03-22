@@ -1,4 +1,4 @@
-class TopTrack {
+class TopTrack{
   final String name;
   final String id;
   final String url;
@@ -9,11 +9,10 @@ class TopTrack {
     required this.url,
   });
 
-  factory TopTrack.fromJson(Map<String, dynamic> json) {
+  factory TopTrack.fromJson(Map<String, dynamic> json){
     return TopTrack(
       name: json['name'] ?? '',
       id: json['id'] ?? '',
-      url: json['preview_url'] ?? '',
-    );
+      url: json['preview_url'] ?? '',);
   }
 }

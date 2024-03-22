@@ -1,4 +1,4 @@
-class AlbumDetails {
+class AlbumDetails{
   String title;
   List<String> images;
   List<String> artists;
@@ -12,10 +12,9 @@ class AlbumDetails {
     required this.artists,
     required this.songs,
     required this.id,
-    required this.artistId,
-  });
+    required this.artistId,});
 
-  factory AlbumDetails.fromJson(Map<String, dynamic> json) {
+  factory AlbumDetails.fromJson(Map<String, dynamic> json){
     List<String> artistNames = [];
     List<String> artistIds = [];
     if (json.containsKey('artists')) {
@@ -28,14 +27,14 @@ class AlbumDetails {
       }
     }
 
-    List<String> url = [];
+    List<String> url= [];
     if (json.containsKey('images')) {
       json['images'].forEach((image) {
         url.add(image['url']);
       });
     }
 
-    List<SongDetails> songs = [];
+    List<SongDetails> songs =[];
     if (json.containsKey('tracks')) {
       var tracksData = json['tracks'];
       if (tracksData != null && tracksData['items'] is List) {
@@ -59,7 +58,7 @@ class AlbumDetails {
 }
 
 
-class SongDetails {
+class SongDetails{
   String name;
   String previewUrl;
 
@@ -68,7 +67,7 @@ class SongDetails {
     required this.previewUrl,
   });
 
-  factory SongDetails.fromJson(Map<String, dynamic> json) {
+  factory SongDetails.fromJson(Map<String, dynamic> json){
     return SongDetails(
       name: json['name'] ?? '',
       previewUrl: json['preview_url'] ?? '',

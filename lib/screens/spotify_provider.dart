@@ -111,7 +111,8 @@ class SpotifyProvider {
       final List<dynamic> albumsData = responseData['albums']['items'];
       List<Album> albums = albumsData.map((data) => Album.fromJson(data)).toList();
       return albums;
-    } else {
+    }
+    else{
       throw Exception('Impossible de charger les albums');
     }
   }
@@ -131,7 +132,8 @@ class SpotifyProvider {
       final List<dynamic> artistsData = responseData['artists']['items'];
       List<ArtistDetails> artists = artistsData.map((data) => ArtistDetails.fromJson(data)).toList();
       return artists;
-    } else {
+    }
+    else{
       throw Exception('Impossible de charger les albums');
     }
   }

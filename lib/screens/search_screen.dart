@@ -12,13 +12,16 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
   TextEditingController _searchController = TextEditingController();
   List<Album> _searchResultsAlbums = [];
+
   List<ArtistDetails> _searchResultsArtists = [];
+  
   bool _searchingForAlbums = true; //etat de recherche
 
   void _performSearch(String query) {
-    if (_searchingForAlbums) {
+    if(_searchingForAlbums){
       SpotifyProvider.searchAlbums(query).then((albums) {
         setState(() {
           _searchResultsAlbums = albums;
@@ -26,27 +29,31 @@ class _SearchScreenState extends State<SearchScreen> {
       }).catchError((error) {
         print('Album non trouvé : $error');
       });
-    } else {
+    }
+    
+    else {
       SpotifyProvider.searchArtists(query).then((artists) {
         setState(() {
           _searchResultsArtists = artists.cast<ArtistDetails>();
         });
-      }).catchError((error) {
+      }).catchError((error){
         print('Artiste non trouvé: $error');
       });
     }
   }
 
-  void _navigateToAlbumDetails(String albumId) {
+  void _navigateToAlbumDetails(String albumId){
     context.go('/a/albumdetails/$albumId');
   }
 
-  void _navigateToArtistDetails(String artistId) {
+  void _navigateToArtistDetails(String artistId){
+
     context.go('/a/artistedetails/$artistId');
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+
     return Scaffold(
       appBar: AppBar(title: const Text('Recherche')),
       body: Padding(
@@ -58,8 +65,8 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () {
-                    setState(() {
+                  onPressed: (){
+                    setState((){
                       _searchingForAlbums = true;
                     });
                   },
@@ -67,8 +74,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 SizedBox(width: 20),
                 TextButton(
-                  onPressed: () {
-                    setState(() {
+                  onPressed: (){
+                    setState((){
                       _searchingForAlbums = false;
                     });
                   },
@@ -81,7 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration: InputDecoration(
                 labelText: _searchingForAlbums ? 'Recherche album' : 'Recherche artiste',
                 suffixIcon: IconButton(
-                  onPressed: () {
+                  onPressed: (){
                     _performSearch(_searchController.text);
                   },
                   icon: Icon(Icons.search),
@@ -94,7 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? (_searchResultsAlbums.isNotEmpty
                       ? ListView.builder(
                           itemCount: _searchResultsAlbums.length,
-                          itemBuilder: (context, index) {
+                          itemBuilder: (context, index){
                             return ListTile(
                               title: Text(_searchResultsAlbums[index].name),
                               subtitle: Text(_searchResultsAlbums[index].id),

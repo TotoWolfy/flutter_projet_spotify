@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:projet_spotify_gorouter/models/album.dart';
 
-class SearchResult {
+class SearchResult{
   final String href;
   final List<Album> items;
 
@@ -11,7 +11,7 @@ class SearchResult {
     required this.items,
   });
 
-  factory SearchResult.fromJson(Map<String, dynamic> json) {
+  factory SearchResult.fromJson(Map<String, dynamic> json){
     return SearchResult(
       href: json['href'] ?? '',
       items: List<Album>.from(json['items'].map((item) => Album.fromJson(item))),
