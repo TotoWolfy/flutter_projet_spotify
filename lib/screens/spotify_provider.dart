@@ -9,7 +9,7 @@ import '../models/albumdetails.dart';
 class SpotifyProvider {
   
   static const String baseUrl = 'https://api.spotify.com';
-  static const String token = 'BQBWGe39jrNur12dUCy4A9hhgsNS3p6ieib2Vf2sUrVdg6EDgdAZQYPSnFzhwHFxdEEfGWYbOoNpHfhTHv7ChTra_09inc4VvGe4Ruxw8xL0Q2RTCHc';
+  static const String token = 'entrez votre token';
 
   //requête api avec réponse dans une liste
   static Future<List<Album>> getAlbums() async {
